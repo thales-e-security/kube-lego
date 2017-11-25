@@ -17,13 +17,13 @@ import (
 	"github.com/jetstack/kube-lego/pkg/kubelego_const"
 	"github.com/jetstack/kube-lego/pkg/provider/gce"
 	"github.com/jetstack/kube-lego/pkg/provider/nginx"
+	"github.com/jetstack/kube-lego/pkg/provider/istio"
 	"github.com/jetstack/kube-lego/pkg/secret"
 
 	log "github.com/Sirupsen/logrus"
 	"k8s.io/apimachinery/pkg/util/intstr"
 	"k8s.io/client-go/kubernetes"
 	k8sApi "k8s.io/client-go/pkg/api/v1"
-	"github.com/jetstack/kube-lego/pkg/provider/istio"
 )
 
 var _ kubelego.KubeLego = &KubeLego{}

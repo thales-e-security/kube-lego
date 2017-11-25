@@ -4,9 +4,6 @@
 package mocks
 
 import (
-	net "net"
-	time "time"
-
 	logrus "github.com/Sirupsen/logrus"
 	gomock "github.com/golang/mock/gomock"
 	. "github.com/jetstack/kube-lego/pkg/kubelego_const"
@@ -14,6 +11,8 @@ import (
 	kubernetes "k8s.io/client-go/kubernetes"
 	v1 "k8s.io/client-go/pkg/api/v1"
 	v1beta1 "k8s.io/client-go/pkg/apis/extensions/v1beta1"
+	net "net"
+	time "time"
 )
 
 // Mock of KubeLego interface
@@ -135,6 +134,26 @@ func (_m *MockKubeLego) LegoServiceNameNginx() string {
 
 func (_mr *_MockKubeLegoRecorder) LegoServiceNameNginx() *gomock.Call {
 	return _mr.mock.ctrl.RecordCall(_mr.mock, "LegoServiceNameNginx")
+}
+
+func (_m *MockKubeLego) LegoIngressNameIstio() string {
+	ret := _m.ctrl.Call(_m, "LegoIngressNameIstio")
+	ret0, _ := ret[0].(string)
+	return ret0
+}
+
+func (_mr *_MockKubeLegoRecorder) LegoIngressNameIstio() *gomock.Call {
+	return _mr.mock.ctrl.RecordCall(_mr.mock, "LegoIngressNameIstio")
+}
+
+func (_m *MockKubeLego) LegoServiceNameIstio() string {
+	ret := _m.ctrl.Call(_m, "LegoServiceNameIstio")
+	ret0, _ := ret[0].(string)
+	return ret0
+}
+
+func (_mr *_MockKubeLegoRecorder) LegoServiceNameIstio() *gomock.Call {
+	return _mr.mock.ctrl.RecordCall(_mr.mock, "LegoServiceNameIstio")
 }
 
 func (_m *MockKubeLego) LegoServiceNameGce() string {
