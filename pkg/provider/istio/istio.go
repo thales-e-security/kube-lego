@@ -100,7 +100,7 @@ func (p *Istio) updateIngress() error {
 		k8sExtensions.HTTPIngressPath{
 			Path: kubelego.AcmeHttpChallengePath,
 			Backend: k8sExtensions.IngressBackend{
-				ServiceName: p.kubelego.LegoServiceNameNginx(),
+				ServiceName: p.kubelego.LegoServiceNameIstio(),
 				ServicePort: p.kubelego.LegoHTTPPort(),
 			},
 		},
