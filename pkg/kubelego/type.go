@@ -19,6 +19,8 @@ type KubeLego struct {
 	legoEmail                    string
 	legoSecretName               string
 	legoIngressNameNginx         string
+	legoIngressNameIstio         string
+	legoServiceNameIstio         string
 	legoNamespace                string
 	legoPodIP                    net.IP
 	legoServiceNameNginx         string

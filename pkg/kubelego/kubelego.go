@@ -14,7 +14,7 @@ import (
 
 	"github.com/jetstack/kube-lego/pkg/acme"
 	"github.com/jetstack/kube-lego/pkg/ingress"
-	kubelego "github.com/jetstack/kube-lego/pkg/kubelego_const"
+	"github.com/jetstack/kube-lego/pkg/kubelego_const"
 	"github.com/jetstack/kube-lego/pkg/provider/gce"
 	"github.com/jetstack/kube-lego/pkg/provider/nginx"
 	"github.com/jetstack/kube-lego/pkg/secret"
@@ -23,6 +23,7 @@ import (
 	"k8s.io/apimachinery/pkg/util/intstr"
 	"k8s.io/client-go/kubernetes"
 	k8sApi "k8s.io/client-go/pkg/api/v1"
+	"github.com/jetstack/kube-lego/pkg/provider/istio"
 )
 
 var _ kubelego.KubeLego = &KubeLego{}
@@ -113,6 +114,8 @@ func (kl *KubeLego) Init() {
 		case "nginx":
 			kl.legoIngressProvider["nginx"] = nginx.New(kl)
 			break
+		case "istio":
+			kl.legoIngressProvider["istio"] = istio.New(kl)
 		default:
 			kl.Log().Warnf("Unsupported provider [%s], please add a handler in kubelego.go#Init()", provider)
 			break
@@ -203,6 +206,14 @@ func (kl *KubeLego) LegoDefaultIngressProvider() string {
 func (kl *KubeLego) LegoIngressNameNginx() string {
 	return kl.legoIngressNameNginx
 }
+
+func (kl *KubeLego) LegoIngressNameIstio() string {
+	return kl.legoIngressNameIstio
+}
+func (kl *KubeLego) LegoServiceNameIstio() string {
+	return kl.legoServiceNameIstio
+}
+
 func (kl *KubeLego) LegoSupportedIngressClass() []string {
 	return kl.legoSupportedIngressClass
 }
@@ -338,6 +349,13 @@ func (kl *KubeLego) paramsLego() error {
 		kl.legoIngressNameNginx = os.Getenv("LEGO_INGRESS_NAME")
 		if len(kl.legoIngressNameNginx) == 0 {
 			kl.legoIngressNameNginx = "kube-lego-nginx"
+		}
+	}
+	kl.legoIngressNameIstio = os.Getenv("LEGO_INGRESS_NAME_ISTIO")
+	if len(kl.legoIngressNameIstio) == 0 {
+		kl.legoIngressNameIstio = os.Getenv("LEGO_INGRESS_NAME")
+		if len(kl.legoIngressNameIstio) == 0 {
+			kl.legoIngressNameIstio = "kube-lego-istio"
 		}
 	}
 

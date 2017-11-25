@@ -22,6 +22,8 @@ type KubeLego interface {
 	LegoWatchNamespace() string
 	LegoIngressNameNginx() string
 	LegoServiceNameNginx() string
+	LegoIngressNameIstio() string
+	LegoServiceNameIstio() string
 	LegoServiceNameGce() string
 	LegoDefaultIngressClass() string
 	LegoDefaultIngressProvider() string
